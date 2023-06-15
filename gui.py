@@ -135,7 +135,7 @@ class KeyboardListener(Widget):
 
     def _keyboard_closed(self):
         """Отвязка клавиатуры от окна"""
-        log('shutting down keyboard')
+        log('выключение клавиатуры')
         self._keyboard.unbind(on_key_down=self._on_keyboard_down)
         self._keyboard = None
 

@@ -19,7 +19,7 @@ class KeyboardTrainer:
 
     def newInput(self, instance):
         """Ввод введенного текста в поле"""
-        log('new')
+        log('Новый текст')
         insertedText = self.app.TextInputWidget.text
         log('inserted text:', insertedText)
 
@@ -114,12 +114,12 @@ class KeyboardInput:
             self.totalClicks += 1
 
         if match(text, self.text[self.letterNumber], modifiers):
-            log('Right letter!!!')
+            log('Правильная буква!!!')
             self.letterNumber += 1
             self.app.addLetter(self.letterNumber, self.text)
         else:
-            log('Wrong letter!!! Got:', text,
-                'I needed:', (self.text[self.letterNumber],))
+            log('Неверная буква:', text,
+                'Мне нужна:', (self.text[self.letterNumber],))
             self.wrongLetters[self.text[self.letterNumber]] += 1
 
         if len(self.text) == self.letterNumber:

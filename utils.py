@@ -16,6 +16,7 @@ def log(*args):
         print(*args)
 
 
+
 def match(key, target, mod):
     """Совпадает ли нажатая клавиша с целевой буквой"""
     if key == target:
