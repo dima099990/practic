@@ -1,4 +1,4 @@
-"""Module with logical part of the keyboard trainer"""
+"""Модуль с логической частью приложения"""
 
 from collections import defaultdict
 import time
@@ -9,16 +9,16 @@ from gui import KeyboardTrainApp, KeyboardListener
 
 
 class KeyboardTrainer:
-    """Main class of the logical part of the keyboard trainer"""
+    """Главный класс"""
 
     def __init__(self):
-        """Build the app and run it"""
+        """Создание и загрузка приложения"""
         self.app = KeyboardTrainApp(self)
         self.app.run()
         self.keyboardInput = None
 
     def newInput(self, instance):
-        """Starts new phase of input with text from the textarea"""
+        """Ввод введенного текста в поле"""
         log('new')
         insertedText = self.app.TextInputWidget.text
         log('inserted text:', insertedText)
@@ -31,8 +31,7 @@ class KeyboardTrainer:
         self.app.newPhrase(self.keyboardInput, insertedText)
 
     def endInput(self, textLen, totalClicks, inputTime, wrongLetters):
-        """Move current data to the file with statistics
-        and show the menu with statistics"""
+        """сохранение текущей статистики в файл и показ меню со статистикой"""
         nowSpeed = calculateSpeed(textLen, inputTime)
         nowMistakes = totalClicks - textLen
 
@@ -96,8 +95,7 @@ class KeyboardInput:
         self.listener = KeyboardListener(self.onKeyDown)
 
     def onKeyDown(self, keycode, text, modifiers):
-        """Fires in key down event.
-        Collect new statistic and starts redrawing window"""
+        """Сброс статистики"""
         log('The key', keycode, 'have been pressed')
         log(' - modifiers are %r' % modifiers)
         if self.needToUnbind:
@@ -130,12 +128,12 @@ class KeyboardInput:
         return False
 
     def interupt(self):
-        """Interupt input and set need to unbind keyboard"""
+        """отвязка клавиатуры"""
         self.needToUnbind = True
         self.endInput()
 
     def endInput(self):
-        """Runs trigger function for the end of the input"""
+        """функция окончания ввода"""
         endTime = time.time()
         self.endFunc(self.letterNumber, self.totalClicks,
                      endTime - self.startTime, self.wrongLetters)
